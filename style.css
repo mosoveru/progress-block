@@ -1,5 +1,6 @@
 :root {
-
+    --bg: #ffffff;
+    --text: #000000;
 }
 
 * {
@@ -9,4 +10,8 @@
 html,
 body {
     height: 100%;
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
 }
