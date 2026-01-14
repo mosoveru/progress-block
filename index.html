@@ -1,19 +1,33 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Progress</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Progress Block</title>
     <script src="app.js" defer></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/slider.css">
 </head>
 <body>
 <main class="app" aria-label="Демонстрация Progress">
+    <section class="progress">
+    <p>Future Progress Circle</p>
+    </section>
     <section class="controls" aria-label="Элементы для управления блоком Progress">
-        <label class="control">
-            <input type="checkbox">
-            <span class="slider round"></span>
-        </label>
+        <div class="control">
+            <label class="switch">
+                <input id="animateSwitch" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+            <span class="label">Animate</span>
+        </div>
+        <div class="control">
+            <label class="switch">
+                <input id="hideSwitch" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+            <span class="label">Hide</span>
+        </div>
     </section>
 </main>
 </body>

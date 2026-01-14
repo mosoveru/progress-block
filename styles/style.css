@@ -1,0 +1,58 @@
+:root {
+    --bg: #ffffff;
+    --text: #000000;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+.app {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    padding: 10px;
+    place-items: center;
+}
+
+@media (orientation: portrait) {
+    .app {
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr;
+        max-height: 568px;
+        max-width: 320px;
+    }
+}
+
+@media (orientation: landscape) {
+    .app {
+        grid-template-rows: 1fr;
+        grid-template-columns: 1fr 1fr;
+        max-height: 320px;
+        max-width: 568px;
+    }
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.control {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
