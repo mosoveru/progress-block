@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Progress Block</title>
-    <script src="app.js" defer></script>
+    <script src="app.js" type="module" defer></script>
     <link rel="stylesheet" href="styles/variables.css">
     <link rel="stylesheet" href="fonts/fonts.css">
     <link rel="stylesheet" href="styles/slider.css">
     <link rel="stylesheet" href="styles/style.css">
-</head>
-<body>
-<main class="app" aria-label="Демонстрация Progress">
-    <section class="progress">
-    <p>Future Progress Circle</p>
-    </section>
-    <section class="controls" aria-label="Элементы для управления блоком Progress">
+  </head>
+  <body>
+    <main class="app" aria-label="Демонстрация Progress">
+      <section class="progress-area">
+        <div id="progressRoot" class="progress-root"></div>
+      </section>
+      <section class="controls" aria-label="Элементы для управления блоком Progress">
         <div class="control">
-            <input
-              id="valueInput"
-              class="value-input"
-              type="text"
-              inputmode="numeric"
-              value="50"
-            />
-            <span class="label">Value</span>
+          <input
+                  id="valueInput"
+                  class="value-input"
+                  type="text"
+                  inputmode="numeric"
+                  value="50"
+          />
+          <span class="label">Value</span>
         </div>
         <div class="control">
-            <label class="switch">
-                <input id="animateSwitch" type="checkbox">
-                <span class="slider round"></span>
-            </label>
-            <span class="label">Animate</span>
+          <label class="switch">
+            <input id="animateSwitch" type="checkbox">
+            <span class="slider round"></span>
+          </label>
+          <span class="label">Animate</span>
         </div>
         <div class="control">
-            <label class="switch">
-                <input id="hideSwitch" type="checkbox">
-                <span class="slider round"></span>
-            </label>
-            <span class="label">Hide</span>
+          <label class="switch">
+            <input id="hideSwitch" type="checkbox">
+            <span class="slider round"></span>
+          </label>
+          <span class="label">Hide</span>
         </div>
-    </section>
-</main>
-</body>
+      </section>
+    </main>
+  </body>
 </html>

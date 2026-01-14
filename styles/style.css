@@ -20,7 +20,6 @@ body {
     width: 100%;
     display: grid;
     padding: 10px;
-    place-items: center;
 }
 
 @media (orientation: portrait) {
@@ -45,6 +44,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    justify-self: center;
+    align-self: center;
 }
 
 .control {
@@ -61,4 +62,18 @@ body {
     text-align: center;
     font-family: inherit;
     font-size: inherit;
+}
+
+.progress-area {
+    display: flex;
+}
+
+.progress-root {
+    flex-grow: 1;
+    display: grid;
+    place-items: center;
+}
+
+.progress__circle {
+    stroke: black;
 }
