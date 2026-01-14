@@ -1,4 +1,4 @@
-import { ProgressComponent } from "./progress.js";
+import { ProgressComponent } from "./components/progress.js";
 
 const progressRoot = document.getElementById("progressRoot");
 const valueInput = document.getElementById("valueInput");

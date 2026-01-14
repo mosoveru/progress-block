@@ -73,7 +73,3 @@ body {
     display: grid;
     place-items: center;
 }
-
-.progress__circle {
-    stroke: black;
-}

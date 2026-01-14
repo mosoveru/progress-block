@@ -1,0 +1,12 @@
+:root {
+    --circle-track-color: #EEF3F6;
+    --circle-arc-color: #015DFE;
+}
+
+.progress__track {
+    stroke: var(--circle-track-color);
+}
+
+.progress__arc {
+    stroke: var(--circle-arc-color);
+}
