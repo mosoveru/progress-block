@@ -4,8 +4,10 @@ export class ProgressComponent {
     #svg;
     #track;
     #arc;
-    #value = 0;
     #circumference;
+    #value = 0;
+    #animated = false;
+    #hidden = false;
 
     constructor({
             size = 160,
@@ -59,11 +61,13 @@ export class ProgressComponent {
     }
 
     setAnimate(isAnimated) {
-        this.#svg.classList.toggle('progress_play', Boolean(isAnimated));
+        this.#animated = Boolean(isAnimated);
+        this.#svg.classList.toggle('progress_play', this.#animated);
     }
 
     setHidden(isHidden) {
-        this.#svg.style.display = Boolean(isHidden) ? 'none' : '';
+        this.#hidden = Boolean(isHidden);
+        this.#svg.style.display = this.#hidden ? 'none' : '';
     }
 
     mount(container) {
@@ -72,6 +76,18 @@ export class ProgressComponent {
         }
         container.appendChild(this.#svg);
         return this;
+    }
+
+    destroy() {
+        this.#svg.remove();
+    }
+
+    getState() {
+        return {
+            animated: this.#animated,
+            track: this.#track,
+            value: this.#value,
+        }
     }
 
     static #createSVGCircle({ cx, cy, radius, stroke, strokeColor }) {
