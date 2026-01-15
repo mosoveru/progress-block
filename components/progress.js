@@ -84,9 +84,9 @@ export class ProgressComponent {
 
     getState() {
         return {
-            animated: this.#animated,
-            track: this.#track,
             value: this.#value,
+            animated: this.#animated,
+            hidden: this.#hidden,
         }
     }
 
