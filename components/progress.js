@@ -1,5 +1,10 @@
 export class ProgressComponent {
-    static svgNamespace = 'http://www.w3.org/2000/svg';
+    static #svgNamespace = 'http://www.w3.org/2000/svg';
+    static #INVALID_CONTAINER_ERROR = 'Container must be an instance of HTMLElement';
+    static #svgClassName = 'progress';
+    static #trackClassName = 'progress__track';
+    static #arcClassName = 'progress__arc';
+    static #playAnimationClassName = 'progress_play';
 
     #svg;
     #track;
@@ -8,20 +13,30 @@ export class ProgressComponent {
     #value = 0;
     #animated = false;
     #hidden = false;
+    #minValue;
+    #maxValue;
 
     constructor({
             size = 160,
             stroke = 12,
             trackColor = '#EEF3F6',
             arcColor = '#015DFE',
-            arcTransitionDelay = '1s'
+            arcTransitionDelay = '1s',
+            minValue = 0,
+            maxValue = 100,
         } = {}
     ) {
-        this.#svg = document.createElementNS(ProgressComponent.svgNamespace, 'svg');
+        ProgressComponent.#validateNumberField('size', size);
+        ProgressComponent.#validateNumberField('stroke', stroke);
+        ProgressComponent.#validateNumberField('minValue', minValue);
+        ProgressComponent.#validateNumberField('maxValue', maxValue);
+        this.#minValue = minValue;
+        this.#maxValue = maxValue;
+        this.#svg = document.createElementNS(ProgressComponent.#svgNamespace, 'svg');
         this.#svg.setAttribute('viewBox', `0 0 ${size} ${size}`);
         this.#svg.setAttribute('role', 'img');
         this.#svg.setAttribute('width', String(size));
-        this.#svg.setAttribute('class', 'progress');
+        this.#svg.setAttribute('class', ProgressComponent.#svgClassName);
         const cx = size / 2;
         const cy = size / 2;
         const radius = (size - stroke) / 2;
@@ -31,18 +46,18 @@ export class ProgressComponent {
             cy,
             radius,
             stroke,
-            strokeColor: trackColor
+            strokeColor: String(trackColor)
         });
-        this.#track.setAttribute('class', 'progress__track');
+        this.#track.setAttribute('class', ProgressComponent.#trackClassName);
         this.#arc = ProgressComponent.#createSVGCircle({
             cx,
             cy,
             radius,
             stroke,
-            strokeColor: arcColor
+            strokeColor: String(arcColor)
         });
-        this.#arc.setAttribute('class', 'progress__arc');
-        this.#arc.style.transition = arcTransitionDelay;
+        this.#arc.setAttribute('class', ProgressComponent.#arcClassName);
+        this.#arc.style.transition = String(arcTransitionDelay);
         this.#arc.style.strokeDasharray = `${this.#circumference}`;
         this.#arc.style.strokeDashoffset = `${this.#circumference}`;
         this.#svg.appendChild(this.#track);
@@ -50,14 +65,14 @@ export class ProgressComponent {
     }
 
     setArcValue(value) {
-        this.#value = ProgressComponent.#clampValue(value);
+        this.#value = ProgressComponent.#clampValue(value, this.#minValue, this.#maxValue);
         this.#arc.style.strokeDashoffset = this.#circumference * (1 - this.#value / 100);
         return this.#value;
     }
 
     setAnimate(isAnimated) {
         this.#animated = Boolean(isAnimated);
-        this.#svg.classList.toggle('progress_play', this.#animated);
+        this.#svg.classList.toggle(ProgressComponent.#playAnimationClassName, this.#animated);
     }
 
     setHidden(isHidden) {
@@ -67,7 +82,7 @@ export class ProgressComponent {
 
     mount(container) {
         if (!(container instanceof HTMLElement)) {
-            throw new TypeError('Контейнер должен быть экземпляром HTMLElement');
+            throw new TypeError(ProgressComponent.#INVALID_CONTAINER_ERROR);
         }
         container.appendChild(this.#svg);
         return this;
@@ -86,7 +101,7 @@ export class ProgressComponent {
     }
 
     static #createSVGCircle({ cx, cy, radius, stroke, strokeColor }) {
-        const circle = document.createElementNS(ProgressComponent.svgNamespace, 'circle');
+        const circle = document.createElementNS(ProgressComponent.#svgNamespace, 'circle');
         circle.setAttribute('cx', String(cx));
         circle.setAttribute('cy', String(cy));
         circle.setAttribute('r', String(radius));
@@ -96,10 +111,20 @@ export class ProgressComponent {
         return circle;
     }
 
-    static #clampValue(value) {
+    static #clampValue(value, min, max) {
         const num = Number(value);
-        if (!Number.isFinite(num)) return 0;
+        if (!ProgressComponent.#isNum(num)) return min;
         const roundedNum = Math.round(num);
-        return Math.min(100, Math.max(0, roundedNum));
+        return Math.min(max, Math.max(min, roundedNum));
+    }
+
+    static #validateNumberField(fieldName, fieldValue) {
+        if (!ProgressComponent.#isNum(fieldValue)) {
+            throw new TypeError(`Provided ${fieldName} value is not valid number`);
+        }
+    }
+
+    static #isNum(num) {
+        return Number.isFinite(Number(num));
     }
 }
