@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Progress Block</title>
-    <script src="app.js" type="module" defer></script>
     <link rel="stylesheet" href="styles/variables.css">
     <link rel="stylesheet" href="fonts/fonts.css">
     <link rel="stylesheet" href="components/progress_styles.css">
     <link rel="stylesheet" href="styles/slider.css">
     <link rel="stylesheet" href="styles/style.css">
+    <script src="app.js" type="module" defer></script>
   </head>
   <body>
-    <main class="app" aria-label="Демонстрация Progress">
+    <main class="app" aria-label="Progress Demonstration">
       <section class="progress-area">
-        <div id="progressRoot" class="progress-root"></div>
+        <div id="progressRoot" class="progress-root" aria-label="Progress image"></div>
       </section>
-      <section class="controls" aria-label="Элементы для управления блоком Progress">
+      <section class="controls" aria-label="Progress Block Controls">
         <div class="control">
           <input
                   id="valueInput"
@@ -24,19 +24,20 @@
                   type="text"
                   inputmode="numeric"
                   value="0"
+                  aria-label="Value input for progress"
           />
           <span class="label">Value</span>
         </div>
         <div class="control">
           <label class="switch">
-            <input id="animateSwitch" type="checkbox">
+            <input id="animateSwitch" type="checkbox" aria-label="Turn on/off animation on progress">
             <span class="slider round"></span>
           </label>
           <span class="label">Animate</span>
         </div>
         <div class="control">
           <label class="switch">
-            <input id="hideSwitch" type="checkbox">
+            <input id="hideSwitch" type="checkbox" aria-label="Hide progress or show">
             <span class="slider round"></span>
           </label>
           <span class="label">Hide</span>
