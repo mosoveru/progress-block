@@ -6,7 +6,6 @@ const animateSwitch = document.getElementById('animateSwitch');
 const hideSwitch = document.getElementById('hideSwitch');
 
 const progressComponent = new ProgressComponent();
-console.log(progressComponent);
 
 valueInput.addEventListener('change', e => {
     valueInput.value = progressComponent.setArcValue(e.target.value);
@@ -14,5 +13,8 @@ valueInput.addEventListener('change', e => {
 animateSwitch.addEventListener('change', e => {
     progressComponent.setAnimate(e.target.checked);
 });
+hideSwitch.addEventListener('change', e => {
+    progressComponent.setHidden(e.target.checked);
+})
 
 progressComponent.mount(progressRoot);

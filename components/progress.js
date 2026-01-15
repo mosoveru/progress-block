@@ -18,6 +18,7 @@ export class ProgressComponent {
         const svg = document.createElementNS(ProgressComponent.svgNamespace, 'svg');
         svg.setAttribute('viewBox', `0 0 ${size} ${size}`);
         svg.setAttribute('role', 'img');
+        svg.setAttribute('width', String(size));
         const cx = size / 2;
         const cy = size / 2;
         const radius = (size - stroke) / 2;
@@ -58,6 +59,10 @@ export class ProgressComponent {
 
     setAnimate(isAnimated) {
         this.#arc.classList.toggle('progress__arc_play', Boolean(isAnimated));
+    }
+
+    setHidden(isHidden) {
+        this.#svg.style.display = Boolean(isHidden) ? 'none' : '';
     }
 
     mount(container) {

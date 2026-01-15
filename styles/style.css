@@ -19,33 +19,14 @@ body {
     height: 100%;
     width: 100%;
     display: grid;
-    padding: 10px;
-}
-
-@media (orientation: portrait) {
-    .app {
-        grid-template-rows: 1fr 1fr;
-        grid-template-columns: 1fr;
-        max-height: 568px;
-        max-width: 320px;
-    }
-}
-
-@media (orientation: landscape) {
-    .app {
-        grid-template-rows: 1fr;
-        grid-template-columns: 1fr 1fr;
-        max-height: 320px;
-        max-width: 568px;
-    }
+    padding: 5px;
+    gap: 50px;
 }
 
 .controls {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    justify-self: center;
-    align-self: center;
 }
 
 .control {
@@ -71,5 +52,40 @@ body {
 .progress-root {
     flex-grow: 1;
     display: grid;
-    place-items: center;
+}
+
+@media (orientation: portrait) {
+    .app {
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr;
+        max-height: 568px;
+        max-width: 320px;
+    }
+
+    .progress-root {
+        place-items: end center;
+    }
+
+    .controls {
+        align-self: start;
+        justify-self: center;
+    }
+}
+
+@media (orientation: landscape) {
+    .app {
+        grid-template-rows: 1fr;
+        grid-template-columns: 1fr 1fr;
+        max-height: 320px;
+        max-width: 568px;
+    }
+
+    .progress-root {
+        place-items: center end;
+    }
+
+    .controls {
+        align-self: center;
+        justify-self: start;
+    }
 }
