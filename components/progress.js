@@ -17,47 +17,42 @@ export class ProgressComponent {
             arcTransitionDelay = '1s'
         } = {}
     ) {
-        const svg = document.createElementNS(ProgressComponent.svgNamespace, 'svg');
-        svg.setAttribute('viewBox', `0 0 ${size} ${size}`);
-        svg.setAttribute('role', 'img');
-        svg.setAttribute('width', String(size));
-        svg.setAttribute('class', 'progress');
+        this.#svg = document.createElementNS(ProgressComponent.svgNamespace, 'svg');
+        this.#svg.setAttribute('viewBox', `0 0 ${size} ${size}`);
+        this.#svg.setAttribute('role', 'img');
+        this.#svg.setAttribute('width', String(size));
+        this.#svg.setAttribute('class', 'progress');
         const cx = size / 2;
         const cy = size / 2;
         const radius = (size - stroke) / 2;
-        const trackCircle = ProgressComponent.#createSVGCircle({
+        this.#circumference = 2 * Math.PI * radius;
+        this.#track = ProgressComponent.#createSVGCircle({
             cx,
             cy,
             radius,
             stroke,
             strokeColor: trackColor
         });
-        trackCircle.setAttribute('class', 'progress__track');
-        svg.appendChild(trackCircle);
-        const arc = ProgressComponent.#createSVGCircle({
+        this.#track.setAttribute('class', 'progress__track');
+        this.#arc = ProgressComponent.#createSVGCircle({
             cx,
             cy,
             radius,
             stroke,
             strokeColor: arcColor
         });
-        arc.setAttribute('class', 'progress__arc');
-        arc.style.transition = arcTransitionDelay;
-        svg.appendChild(arc);
-        const circumference = 2 * Math.PI * radius;
-        this.#circumference = circumference;
-        arc.style.strokeDasharray = `${circumference}`;
-        arc.style.strokeDashoffset = `${circumference}`;
-        this.#arc = arc;
-        this.#track = trackCircle;
-        this.#svg = svg;
+        this.#arc.setAttribute('class', 'progress__arc');
+        this.#arc.style.transition = arcTransitionDelay;
+        this.#arc.style.strokeDasharray = `${this.#circumference}`;
+        this.#arc.style.strokeDashoffset = `${this.#circumference}`;
+        this.#svg.appendChild(this.#track);
+        this.#svg.appendChild(this.#arc);
     }
 
     setArcValue(value) {
-        const clampedValue = ProgressComponent.#clampValue(value);
-        this.#value = clampedValue;
-        this.#arc.style.strokeDashoffset = this.#circumference * (1 - clampedValue / 100);
-        return clampedValue;
+        this.#value = ProgressComponent.#clampValue(value);
+        this.#arc.style.strokeDashoffset = this.#circumference * (1 - this.#value / 100);
+        return this.#value;
     }
 
     setAnimate(isAnimated) {
@@ -87,7 +82,7 @@ export class ProgressComponent {
             value: this.#value,
             animated: this.#animated,
             hidden: this.#hidden,
-        }
+        };
     }
 
     static #createSVGCircle({ cx, cy, radius, stroke, strokeColor }) {

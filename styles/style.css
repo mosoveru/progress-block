@@ -9,7 +9,7 @@ body {
     height: 100dvh;
     width: 100dvw;
     margin: 0;
-    font-family: var(--main-font-style), sans-serif;
+    font-family: var(--main-font-style);
     font-weight: var(--font-weight);
     background-color: var(--bg);
     color: var(--text);

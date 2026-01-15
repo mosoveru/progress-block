@@ -1,4 +1,4 @@
-import { ProgressComponent } from './components/progress.js';
+import { ProgressComponent } from '../components/progress.js';
 
 const progressRoot = document.getElementById('progressRoot');
 const valueInput = document.getElementById('valueInput');
@@ -15,6 +15,6 @@ animateSwitch.addEventListener('change', e => {
 });
 hideSwitch.addEventListener('change', e => {
     progressComponent.setHidden(e.target.checked);
-})
+});
 
 progressComponent.mount(progressRoot);
