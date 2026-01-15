@@ -6,8 +6,8 @@ html,
 body {
     display: grid;
     place-items: center;
-    height: 100vh;
-    width: 100vw;
+    height: 100dvh;
+    width: 100dvw;
     margin: 0;
     font-family: var(--main-font-style), sans-serif;
     font-weight: var(--font-weight);
