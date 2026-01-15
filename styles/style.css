@@ -9,16 +9,17 @@ body {
     height: 100dvh;
     width: 100dvw;
     margin: 0;
-    font-family: var(--main-font-style);
+    font-family: var(--main-font-style), sans-serif;
     font-weight: var(--font-weight);
     background-color: var(--bg);
     color: var(--text);
 }
 
 .app {
+    display: grid;
+    position: relative;
     height: 100%;
     width: 100%;
-    display: grid;
     padding: 5px;
     gap: 50px;
 }
@@ -49,9 +50,16 @@ body {
     display: flex;
 }
 
-.progress-root {
+.progress-area__wrapper {
     flex-grow: 1;
     display: grid;
+}
+
+.app__header {
+    position: absolute;
+    margin: 0;
+    padding: 5px;
+    font-size: inherit;
 }
 
 @media (orientation: portrait) {
@@ -62,7 +70,7 @@ body {
         max-width: 320px;
     }
 
-    .progress-root {
+    .progress-area__wrapper {
         place-items: end center;
     }
 
@@ -80,7 +88,7 @@ body {
         max-width: 568px;
     }
 
-    .progress-root {
+    .progress-area__wrapper {
         place-items: center end;
     }
 
