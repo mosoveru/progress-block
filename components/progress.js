@@ -14,7 +14,7 @@ export class ProgressComponent {
             stroke = 12,
             trackColor = '#EEF3F6',
             arcColor = '#015DFE',
-            arcTransitionDelay = '0'
+            arcTransitionDelay = '1s'
         } = {}
     ) {
         const svg = document.createElementNS(ProgressComponent.svgNamespace, 'svg');
