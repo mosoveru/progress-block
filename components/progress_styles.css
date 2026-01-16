@@ -1,7 +1,11 @@
+:root {
+    --animation-duration: 900ms;
+}
+
 .progress {
     transform: rotate(-90deg);
     transform-origin: 50% 50%;
-    animation: spin 900ms linear infinite;
+    animation: spin var(--animation-duration) linear infinite;
     animation-play-state: paused;
 }
 

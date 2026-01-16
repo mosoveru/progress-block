@@ -11,8 +11,8 @@ export class ProgressComponent {
     #arc;
     #circumference;
     #value = 0;
-    #animated = false;
-    #hidden = false;
+    #isAnimated = false;
+    #isHidden = false;
     #minValue;
     #maxValue;
 
@@ -71,13 +71,13 @@ export class ProgressComponent {
     }
 
     setAnimate(isAnimated) {
-        this.#animated = Boolean(isAnimated);
-        this.#svg.classList.toggle(ProgressComponent.#playAnimationClassName, this.#animated);
+        this.#isAnimated = Boolean(isAnimated);
+        this.#svg.classList.toggle(ProgressComponent.#playAnimationClassName, this.#isAnimated);
     }
 
     setHidden(isHidden) {
-        this.#hidden = Boolean(isHidden);
-        this.#svg.style.display = this.#hidden ? 'none' : '';
+        this.#isHidden = Boolean(isHidden);
+        this.#svg.style.display = this.#isHidden ? 'none' : '';
     }
 
     mount(container) {
@@ -92,12 +92,16 @@ export class ProgressComponent {
         this.#svg.remove();
     }
 
-    getState() {
-        return {
-            value: this.#value,
-            animated: this.#animated,
-            hidden: this.#hidden,
-        };
+    get value() {
+        return this.#value;
+    }
+
+    get isAnimated() {
+        return this.#isAnimated;
+    }
+
+    get isHidden() {
+        return this.#isHidden;
     }
 
     static #createSVGCircle({ cx, cy, radius, stroke, strokeColor }) {
